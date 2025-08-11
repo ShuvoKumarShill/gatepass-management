@@ -1,10 +1,12 @@
 from django import forms
 from .models import GatePass
 
+
 class GatePassForm(forms.ModelForm):
     class Meta:
         model = GatePass
         fields = [
+            'gate_pass_number',
             'visitor_name',
             'organization',
             'contact_number',

@@ -1,53 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gate Pass List</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
-<body>
-    {% include 'gatepass/base.html' %}
+{% extends 'gatepass/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h1>Gate Pass List</h1>
+    <a href="{% url 'gatepass_create' %}" class="btn btn-primary">Create New Gate Pass</a>
     
-    <div class="container">
-        <h1>Gate Pass List</h1>
-        <a href="{% url 'gatepass_create' %}" class="btn btn-primary">Create New Gate Pass</a>
-        
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Gate Pass Number</th>
-                    <th>Visitor Name</th>
-                    <th>Organization</th>
-                    <th>Contact Number</th>
-                    <th>Purpose</th>
-                    <th>Date of Entry</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for gatepass in gatepass_list %}
-                <tr>
-                    <td>{{ gatepass.gate_pass_number }}</td>
-                    <td>{{ gatepass.visitor_name }}</td>
-                    <td>{{ gatepass.organization }}</td>
-                    <td>{{ gatepass.contact_number }}</td>
-                    <td>{{ gatepass.purpose }}</td>
-                    <td>{{ gatepass.date_of_entry }}</td>
-                    <td>{{ gatepass.get_status_display }}</td>
-                    <td>
-                        <a href="{% url 'gatepass_detail' gatepass.id %}" class="btn btn-info">View</a>
-                        <a href="{% url 'gatepass_verify' gatepass.id %}" class="btn btn-warning">Verify</a>
-                    </td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="8">No gate passes available.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</body>
-</html>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Gate Pass Number</th>
+                <th>Visitor Name</th>
+                <th>Organization</th>
+                <th>Contact Number</th>
+                <th>Purpose</th>
+                <th>Date of Entry</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for gatepass in gatepasses %}
+            <tr>
+                <td>{{ gatepass.gate_pass_number }}</td>
+                <td>{{ gatepass.visitor_name }}</td>
+                <td>{{ gatepass.organization }}</td>
+                <td>{{ gatepass.contact_number }}</td>
+                <td>{{ gatepass.purpose }}</td>
+                <td>{{ gatepass.date_of_entry }}</td>
+                <td>{{ gatepass.get_status_display }}</td>
+                <td>
+                    <a href="{% url 'gatepass_detail' gatepass.id %}" class="btn btn-info">View</a>
+                    <a href="{% url 'gatepass_verify' gatepass.id %}" class="btn btn-warning">Verify</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="8">No gate passes available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -19,11 +19,9 @@ class GatePassAPITests(APITestCase):
             'purpose': 'Meeting',
             'date_of_entry': '2023-10-01',
             'time_of_entry': '10:00',
-            'approved_by': self.user.id,
+            'approved_by': 'testuser',
             'status': 'Approved',
             'notes': 'N/A',
-            'visitor_photo': None,  # Assuming photo upload is handled separately
-            'qr_code': None,  # Assuming QR code generation is handled separately
         }
 
     def test_create_gate_pass(self):

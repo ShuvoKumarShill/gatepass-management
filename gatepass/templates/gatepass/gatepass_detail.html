@@ -1,41 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gate Pass Detail</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
-<body>
-    {% extends 'gatepass/base.html' %}
-
-    {% block content %}
-    <div class="container">
-        <h1>Gate Pass Detail</h1>
-        <div class="gatepass-detail">
-            <h2>Gate Pass Number: {{ gatepass.gate_pass_number }}</h2>
-            <p><strong>Visitor Name:</strong> {{ gatepass.visitor_name }}</p>
-            <p><strong>Organization:</strong> {{ gatepass.organization }}</p>
-            <p><strong>Contact Number:</strong> {{ gatepass.contact_number }}</p>
-            <p><strong>Purpose:</strong> {{ gatepass.purpose }}</p>
-            <p><strong>Date of Entry:</strong> {{ gatepass.date_of_entry }}</p>
-            <p><strong>Time of Entry:</strong> {{ gatepass.time_of_entry }}</p>
-            <p><strong>Approved By:</strong> {{ gatepass.approved_by }}</p>
-            <p><strong>Status:</strong> {{ gatepass.status }}</p>
-            <p><strong>Notes:</strong> {{ gatepass.notes }}</p>
-            {% if gatepass.visitor_photo %}
-                <div>
-                    <strong>Visitor Photo:</strong>
-                    <img src="{{ gatepass.visitor_photo.url }}" alt="Visitor Photo" style="max-width: 200px;">
-                </div>
-            {% endif %}
+{% extends 'gatepass/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h1>Gate Pass Detail</h1>
+    <div class="gatepass-detail">
+        <h2>Gate Pass Number: {{ gatepass.gate_pass_number }}</h2>
+        <p><strong>Visitor Name:</strong> {{ gatepass.visitor_name }}</p>
+        <p><strong>Organization:</strong> {{ gatepass.organization }}</p>
+        <p><strong>Contact Number:</strong> {{ gatepass.contact_number }}</p>
+        <p><strong>Purpose:</strong> {{ gatepass.purpose }}</p>
+        <p><strong>Date of Entry:</strong> {{ gatepass.date_of_entry }}</p>
+        <p><strong>Time of Entry:</strong> {{ gatepass.time_of_entry }}</p>
+        <p><strong>Approved By:</strong> {{ gatepass.approved_by }}</p>
+        <p><strong>Status:</strong> {{ gatepass.status }}</p>
+        <p><strong>Notes:</strong> {{ gatepass.notes }}</p>
+        {% if gatepass.visitor_photo %}
+            <div>
+                <strong>Visitor Photo:</strong>
+                <img src="{{ gatepass.visitor_photo.url }}" alt="Visitor Photo" style="max-width: 200px;">
+            </div>
+        {% endif %}
+        {% if gatepass.qr_code %}
             <div>
                 <strong>QR Code:</strong>
                 <img src="{{ gatepass.qr_code.url }}" alt="QR Code" style="max-width: 200px;">
             </div>
-        </div>
-        <a href="{% url 'gatepass_list' %}">Back to Gate Pass List</a>
+        {% endif %}
     </div>
-    {% endblock %}
-</body>
-</html>
+    <a href="{% url 'gatepass_list' %}">Back to Gate Pass List</a>
+</div>
+{% endblock %}
