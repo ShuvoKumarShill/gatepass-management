@@ -1,41 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gate Pass Verification</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
-<body>
-    {% include 'gatepass/base.html' %}
-    
-    <div class="container">
-        <h1>Verify Gate Pass</h1>
-        
-        {% if gate_pass %}
-            <div class="gate-pass-details">
-                <h2>Gate Pass Number: {{ gate_pass.gate_pass_number }}</h2>
-                <p>Visitor Name: {{ gate_pass.visitor_name }}</p>
-                <p>Organization: {{ gate_pass.organization }}</p>
-                <p>Contact Number: {{ gate_pass.contact_number }}</p>
-                <p>Purpose: {{ gate_pass.purpose }}</p>
-                <p>Date of Entry: {{ gate_pass.date_of_entry }}</p>
-                <p>Time of Entry: {{ gate_pass.time_of_entry }}</p>
-                <p>Approved By: {{ gate_pass.approved_by }}</p>
-                <p>Status: {{ gate_pass.status }}</p>
-                <p>Notes: {{ gate_pass.notes }}</p>
-                {% if gate_pass.visitor_photo %}
-                    <img src="{{ gate_pass.visitor_photo.url }}" alt="Visitor Photo">
-                {% endif %}
-                {% if gate_pass.qr_code %}
-                    <img src="{{ gate_pass.qr_code.url }}" alt="QR Code">
-                {% endif %}
-            </div>
-        {% else %}
-            <p>No Gate Pass found for the provided details.</p>
-        {% endif %}
-        
-        <a href="{% url 'gatepass_list' %}">Back to Gate Pass List</a>
-    </div>
-</body>
-</html>
+{% extends 'gatepass/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h1>Verify Gate Pass</h1>
+    {% if gate_pass %}
+        <div class="gate-pass-details">
+            <h2>Gate Pass Number: {{ gate_pass.gate_pass_number }}</h2>
+            <p>Visitor Name: {{ gate_pass.visitor_name }}</p>
+            <p>Organization: {{ gate_pass.organization }}</p>
+            <p>Contact Number: {{ gate_pass.contact_number }}</p>
+            <p>Purpose: {{ gate_pass.purpose }}</p>
+            <p>Date of Entry: {{ gate_pass.date_of_entry }}</p>
+            <p>Time of Entry: {{ gate_pass.time_of_entry }}</p>
+            <p>Approved By: {{ gate_pass.approved_by }}</p>
+            <p>Status: {{ gate_pass.status }}</p>
+            <p>Notes: {{ gate_pass.notes }}</p>
+            {% if gate_pass.visitor_photo %}
+                <img src="{{ gate_pass.visitor_photo.url }}" alt="Visitor Photo">
+            {% endif %}
+            {% if gate_pass.qr_code %}
+                <img src="{{ gate_pass.qr_code.url }}" alt="QR Code">
+            {% endif %}
+        </div>
+    {% else %}
+        <p>No Gate Pass found for the provided details.</p>
+    {% endif %}
+    <a href="{% url 'gatepass_list' %}">Back to Gate Pass List</a>
+</div>
+{% endblock %}

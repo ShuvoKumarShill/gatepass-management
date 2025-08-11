@@ -1,10 +1,12 @@
 from rest_framework import serializers
 from gatepass.models import GatePass
 
+
 class GatePassSerializer(serializers.ModelSerializer):
     class Meta:
         model = GatePass
         fields = [
+            'id',
             'gate_pass_number',
             'visitor_name',
             'organization',

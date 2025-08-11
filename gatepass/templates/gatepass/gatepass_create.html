@@ -1,21 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Gate Pass</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
-<body>
-    {% extends 'gatepass/base.html' %}
-
-    {% block content %}
-    <h1>Create Gate Pass</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
-    </form>
-    {% endblock %}
-</body>
-</html>
+{% extends 'gatepass/base.html' %}
+{% load static %}
+{% block content %}
+<h1>Create Gate Pass</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+<a href="{% url 'gatepass_list' %}">Back to Gate Pass List</a>
+{% endblock %}

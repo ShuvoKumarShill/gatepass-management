@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
-from .models import GatePass
+from gatepass.models import GatePass
+
 
 class GatePassViewTests(TestCase):
 
@@ -44,8 +45,6 @@ class GatePassViewTests(TestCase):
             'approved_by': 'Admin',
             'status': 'Pending',
             'notes': 'N/A',
-            'visitor_photo': None,  # Assuming photo upload is handled separately
-            'qr_code': None  # Assuming QR code generation is handled separately
         })
         self.assertEqual(response.status_code, 302)  # Redirect after successful creation
         self.assertTrue(GatePass.objects.filter(visitor_name='Jane Smith').exists())

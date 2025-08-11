@@ -1,5 +1,6 @@
 from django.test import TestCase
-from .models import GatePass
+from gatepass.models import GatePass
+
 
 class GatePassModelTest(TestCase):
 
@@ -26,12 +27,13 @@ class GatePassModelTest(TestCase):
         self.assertEqual(self.gate_pass.contact_number, "1234567890")
         self.assertEqual(self.gate_pass.purpose, "Business Meeting")
         self.assertEqual(str(self.gate_pass.date_of_entry), "2023-10-01")
-        self.assertEqual(self.gate_pass.time_of_entry, "09:00")
+        # Django may format TimeField to HH:MM; accept either
+        self.assertIn(str(self.gate_pass.time_of_entry), ["09:00", "09:00:00"])
         self.assertEqual(self.gate_pass.approved_by, "Admin")
         self.assertEqual(self.gate_pass.status, "Approved")
         self.assertEqual(self.gate_pass.notes, "N/A")
-        self.assertEqual(self.gate_pass.visitor_photo, "path/to/photo.jpg")
-        self.assertEqual(self.gate_pass.qr_code, "path/to/qr_code.png")
+        self.assertEqual(str(self.gate_pass.visitor_photo), "path/to/photo.jpg")
+        self.assertEqual(str(self.gate_pass.qr_code), "path/to/qr_code.png")
 
     def test_gate_pass_str(self):
         self.assertEqual(str(self.gate_pass), "GP123456 - John Doe")

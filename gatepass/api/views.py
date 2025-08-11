@@ -1,8 +1,9 @@
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from .models import GatePass
+from gatepass.models import GatePass
 from .serializers import GatePassSerializer
+
 
 class GatePassViewSet(viewsets.ModelViewSet):
     queryset = GatePass.objects.all()
@@ -10,7 +11,7 @@ class GatePassViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
     def perform_create(self, serializer):
-        serializer.save(approved_by=self.request.user)
+        serializer.save()
 
     @action(detail=True, methods=['get'])
     def verify(self, request, pk=None):
